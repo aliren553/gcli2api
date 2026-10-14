@@ -1,0 +1,25 @@
+name: Render daytime keepalive
+on:
+  schedule:
+    - cron: '7,17,27,37,47,57 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: render-keepalive
+  cancel-in-progress: false
+jobs:
+  probe:
+    if: github.repository == 'aliren553/gcli2api' && vars.RENDER_KEEPALIVE_ENABLED != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - name: Probe during configured Shanghai hours
+        env:
+          KEEPALIVE_ENABLED: ${{ vars.RENDER_KEEPALIVE_ENABLED || 'true' }}
+          KEEPALIVE_START_HOUR: ${{ vars.RENDER_KEEPALIVE_START_HOUR || '12' }}
+          KEEPALIVE_END_HOUR: ${{ vars.RENDER_KEEPALIVE_END_HOUR || '2' }}
+        run: python3 scripts/render_keepalive.py
