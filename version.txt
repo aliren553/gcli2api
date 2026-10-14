@@ -1,4 +1,4 @@
-full_hash=4dc1a7dc6d1a3738798e17991891df613d98855c
-short_hash=4dc1a7d
-message=Update utils.py
-date=2026-10-14 14:09:11 +0800
+full_hash=36673895eb1657dbe6f3146ea2d785a93889b0a3
+short_hash=3667389
+message=Merge upstream updates; preserve GeminiCLI fixes and add windowed Render HEAD probes
+date=2026-10-14 21:28:41 +0000
